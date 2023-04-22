@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.top-bar{
+    height: 8vh;
+    background-color: rgb(255,153,0);
+}
+
+.brand-name{
+    font-weight: 600;
+}
+
+button{
+    background-color: inherit;
+}
+
+.profile{
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.profile:hover{
+    color: rgb(255,153,0);
+}
+
+.profile:focus{
+    background-color: rgb(212,212,214);
+    color: black;
+}
