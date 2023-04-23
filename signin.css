@@ -7,3 +7,7 @@
 main{
     height: 100vh;
 }
+
+#noAccountYet span{
+    cursor: pointer;
+}

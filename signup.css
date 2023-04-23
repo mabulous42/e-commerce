@@ -11,3 +11,7 @@ main{
 .big-div{
     width: 30%;
 }
+
+#alreadyHaveAccount span{
+    cursor: pointer;
+}

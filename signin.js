@@ -16,3 +16,7 @@ function signIn(ev) {
         localStorage.setItem("currentUser", JSON.stringify(authorizedUser));
     }
 }
+
+function gotoSignUp() {
+    window.location.href = "signup.html";
+}

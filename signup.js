@@ -27,3 +27,7 @@ function signUp(ev) {
     emailAddress.value = "";
     passcode.value = "";
 }
+
+function gotoSignIn() {
+    window.location.href = "index.html";
+}
