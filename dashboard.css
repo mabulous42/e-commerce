@@ -48,3 +48,27 @@ button{
 .profile-parent:focus-within .profile-dropdown{
     display: block;
 }
+
+.category{
+    height: 40vh;
+    margin: 0 10%;
+    padding: 0 10px;
+    overflow: auto;
+}
+
+.category button{
+    padding: 10px;
+}
+
+.category button img{
+    width: 150px;
+}
+
+.category button:hover{
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.329);
+    transform: scale(1.03);
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
