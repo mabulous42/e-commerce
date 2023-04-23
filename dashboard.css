@@ -57,11 +57,12 @@ button{
 }
 
 .category button{
-    padding: 10px;
+    padding: 10px 15px;
+    font-size: 15px;
 }
 
 .category button img{
-    width: 150px;
+    width: 120px;
 }
 
 .category button:hover{
