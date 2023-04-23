@@ -17,16 +17,34 @@ button{
     background-color: inherit;
 }
 
-.profile{
+.profile,
+.cart{
     border-radius: 5px;
     font-weight: 600;
+    padding: 7px 0;
 }
 
-.profile:hover{
+.profile:hover,
+.cart:hover{
     color: rgb(255,153,0);
 }
 
 .profile:focus{
     background-color: rgb(212,212,214);
     color: black;
+}
+
+.cart-items{
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 25%;
+}
+
+.profile-dropdown{
+    display: none;
+}
+
+.profile-parent:focus-within .profile-dropdown{
+    display: block;
 }
