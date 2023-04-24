@@ -90,6 +90,14 @@ button{
     height: 22vh;
 }
 
+.add-to-cart{
+    visibility: hidden;
+}
+
+.items-btn:hover .add-to-cart{
+    visibility: visible;
+}
+
 ::-webkit-scrollbar{
     display: none;
 }
