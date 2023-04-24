@@ -21,13 +21,21 @@ async function showItems() {
     console.log(result);
     result.products.forEach(element => {
         displayTag.innerHTML += `
-            <button class="mx-4 my-3 position-relative">
+        <div>
+            <button class="my-3 position-relative w-100 p-3 items-btn">
                 <div>
-                    <img src="${element.thumbnail}" class="items-images"></img>
-                    <div>${element.title}</div>
+                    <div class="w-75">
+                        <img src="${element.thumbnail}" class="items-images box"></img>                    
+                    </div>
+                    <div class="text-start">
+                        <p class="title">${element.title}</p>
+                        <h5 class="price">${"$"+element.price}</h5>
+                    </div>
+                    <div class="btn btn-warning w-100">ADD TO CART</div>
                 </div>
                 <div class="position-absolute discount-price rounded bg-warning bg-opacity-75">${"-" + element.discountPercentage + "%"}</div>
             </button>
+        </div>
         `
     });
 }
