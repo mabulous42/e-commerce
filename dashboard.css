@@ -71,7 +71,13 @@ button{
 }
 
 .items-images{
-    width: 120px;
+    width: 150px;
+}
+
+.discount-price{
+    top: 0;
+    right: 0;
+    padding: 5px;
 }
 
 ::-webkit-scrollbar{

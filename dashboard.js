@@ -19,17 +19,16 @@ async function showItems() {
     let allItems = await fetch("https://dummyjson.com/products");
     let result = await allItems.json();
     console.log(result);
-    result.products.forEach(element => {        
+    result.products.forEach(element => {
         displayTag.innerHTML += `
-        <div class="d-flex align-items-center">
-            <button>
-                <div class="position-relative">
-                    <img src="${element.images[0]}" class="items-images"></img>
-                    <div class="position absolute">${element.discountPercentage}</div>
+            <button class="mx-4 my-3 position-relative">
+                <div>
+                    <img src="${element.thumbnail}" class="items-images"></img>
+                    <div>${element.title}</div>
                 </div>
+                <div class="position-absolute discount-price rounded bg-warning bg-opacity-75">${"-" + element.discountPercentage + "%"}</div>
             </button>
-        </div>
-        ` 
+        `
     });
 }
 showItems();
