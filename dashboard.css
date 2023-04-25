@@ -103,12 +103,14 @@ button{
     visibility: visible;
 }
 
-.showItemDetailsModal{
+.showItemDetailsModal,
+.showCartModal{
     height: 92vh;
     top: 8vh;
 }
 
-.inner-modal{
+.inner-modal,
+.innerCart-modal{
     height: 100vh;
     position: fixed;
     z-index: 20;

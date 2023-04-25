@@ -3,8 +3,11 @@ let displayTag = document.getElementById("display-items");
 let cartCount = document.getElementById("cartCount");
 let itemsModal = document.getElementById("item-full-details-modal");
 let itemFullDetails = document.getElementById("show-items-details");
+let showCartDetails = document.getElementById("check-out-modal");
+let displayCartTag = document.getElementById("show-cart-details");
 
 itemsModal.style.display = "none";
+// showCartDetails.style.display = "none";
 
 
 //function that allows user to signout of his/her account
