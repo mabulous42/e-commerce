@@ -42,19 +42,19 @@ function showItems() {
     itemList.forEach(element => {
         let carted = myCart.some(item => item.id == element.id);
         displayTag.innerHTML += `
-        <div class='w-25 m-4 shadow p-3 items-btn align-items-center justify-content-center'>
-            <button class='w-100 position-relative' onclick="openF()">
+        <div class='display shadow position-relative p-2 items-btn'>
+            <button onclick="openF()">
                 <div>
                     <div class="w-100">
-                        <img src="${element.thumbnail}" class="items-images box"></img>                    
+                        <img src="${element.thumbnail}" class="items-images w-100"></img>                    
                     </div>
-                    <div class="text-center">
-                        <p class="title">${element.title}</p>
+                    <div class="text-start w-75 ms-4 mt-3">
+                        <p class="title">${element.description}</p>
                         <h5 class="price">${"$" + element.price}</h5>
                     </div>
                     <button class="add-to-cart btn btn-warning w-100" onclick="addToCart(event, ${element.id})">${carted ? "REMOVE FROM CART" : "ADD TO CART"}</button>
+                    <div class="position-absolute discount-price rounded bg-warning bg-opacity-75">${"-" + element.discountPercentage + "%"}</div>
                 </div>
-                <div class="position-absolute discount-price rounded bg-warning bg-opacity-75">${"-" + element.discountPercentage + "%"}</div>
             </button>
         </div>
         `
@@ -78,15 +78,22 @@ function addToCart(ev, id) {
         ev.target.innerHTML = "ADD TO CART";
         let myIndex = myCart.indexOf(found);
         myCart.splice(myIndex, 1);
+        updateCart();
         localStorage.setItem("cart", JSON.stringify(myCart))
     } else {
         ev.target.innerHTML = "REMOVE FROM CART";
         myCart.push(found);
+        updateCart();
         localStorage.setItem("cart", JSON.stringify(myCart))
     }
     console.log(myCart);
     showItems();
 }
+
+function updateCart() {
+    cartCount.innerHTML = myCart.length;
+}
+updateCart();
 
 function openF() {
     console.log("hello");

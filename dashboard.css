@@ -70,13 +70,22 @@ button{
     transform: scale(1.03);
 }
 
-.items-images{
-    width: 150px;
+.items-btn{
+    width: 20%;
+}
+
+.items-btn:hover {
+    transform: scale(1.03);
+}
+
+
+.display{
+    margin: 5px;
 }
 
 .discount-price{
     top: 0;
-    right: 15px;
+    right: 0;
     padding: 5px;
 }
 
@@ -86,16 +95,23 @@ button{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.box{
-    height: 22vh;
-}
-
 .add-to-cart{
     visibility: hidden;
 }
 
 .items-btn:hover .add-to-cart{
     visibility: visible;
+}
+
+.showItemDetailsModal{
+    height: 92vh;
+    top: 8vh;
+}
+
+.inner-modal{
+    height: 100vh;
+    position: fixed;
+    z-index: 20;
 }
 
 ::-webkit-scrollbar{
