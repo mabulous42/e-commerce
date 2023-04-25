@@ -14,7 +14,7 @@
 
 <body>
     <main class="bg-light">
-        <div class="top-bar w-100"></div>
+        <div class="top-bar"></div>
         <nav class="navbar sticky-top bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand brand-name fs-4" href="#">MUSTYL STORE</a>
@@ -35,9 +35,7 @@
                         </div>
                     </button>
                     <button type="button" class="cart w-25 position-relative">
-                        <div
-                            class="bg-danger rounded-circle cart-items position-absolute d-flex align-items-center justify-content-center text-white">
-                            1</div>
+                        <div class="bg-danger rounded-circle cart-items position-absolute d-flex align-items-center justify-content-center text-white" id="cartCount">0</div>
                         <i class="fa-solid fa-cart-shopping me-3"></i>Cart
                     </button>
                 </div>
@@ -97,7 +95,7 @@
         </div> 
         <div class="mt-4 shadow">
             <h1 class="bg-warning">All Products</h1>
-            <div id="display-items" class="d-flex align-items-center justify-content-center flex-wrap container bg-white">
+            <div id="display-items" class=" d-flex flex-wrap align-items-center justify-content-center">
             </div>
         </div>  
              
