@@ -1,9 +1,10 @@
 let userName = document.getElementById("userName");
 let displayTag = document.getElementById("display-items");
 let cartCount = document.getElementById("cartCount");
-let showItemDetails = document.getElementById("item-full-details");
+let itemsModal = document.getElementById("item-full-details-modal");
+let itemFullDetails = document.getElementById("show-items-details");
 
-// showItemDetails.style.display = "none";
+// itemsModal.style.display = "none";
 
 
 //function that allows user to signout of his/her account
@@ -46,10 +47,10 @@ function showItems() {
         let carted = myCart.some(item => item.id == element.id);
         displayTag.innerHTML += `
         <div class='display shadow position-relative p-2 items-btn'>
-            <button onclick="showItemFullDetails()">
+            <button onclick="showItemFullDetails(${element.id})">
                 <div>
                     <div class="w-100">
-                        <img src="${element.thumbnail}" class="items-images w-100"></img>                    
+                        <img src="${element.thumbnail}" class="items-images w-100"/>                    
                     </div>
                     <div class="text-start w-75 ms-4 mt-3">
                         <p class="title">${element.description}</p>
@@ -98,6 +99,19 @@ function updateCart() {
 }
 updateCart();
 
-function showItemFullDetails() {
-    console.log("hello");
+function showItemFullDetails(id) {
+    let clickedItem = itemList.find(el => el.id == id);
+    console.log(clickedItem);
+    itemFullDetails.innerHTML = `
+    <div class="d-flex">
+        <div>
+            <img src="${found.thumbnail}" alt="">
+        </div>
+        <div>${found.description}</div>
+    </div>
+    `
+}
+
+function closeModal() {
+    itemsModal.style.display = "none";
 }

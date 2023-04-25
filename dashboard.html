@@ -98,10 +98,12 @@
             <h1 class="bg-warning">All Products</h1>
             <div id="display-items" class="container-fluid d-flex flex-wrap align-items-center justify-content-center"></div>
         </div>  
-        <div class="showItemDetailsModal position-absolute w-100" id="item-full-details">
+        <div class="showItemDetailsModal position-absolute w-100" id="item-full-details-modal">
             <div class="inner-modal position-fixed w-100 bg-white d-flex align-items-center justify-content-center">
-                <div class="modal-item-div bg-danger w-75 position-relative">
-                    <i class="icofont-close-line position-absolute"></i>
+                <div class="modal-item-div bg-danger w-75 position-relative" id="show-items-details">
+                    <button class="position-absolute end-0 p-2" onclick="closeModal()">
+                        <i class="icofont-close-line fs-2 text-white"></i>
+                    </button>
                 </div>
             </div>
         </div>   
