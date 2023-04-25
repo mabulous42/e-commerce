@@ -5,9 +5,11 @@ let itemsModal = document.getElementById("item-full-details-modal");
 let itemFullDetails = document.getElementById("show-items-details");
 let showCartDetails = document.getElementById("check-out-modal");
 let displayCartTag = document.getElementById("show-cart-details");
+let checkOutAmountTag = document.getElementById("show-total-amount");
+let cartLength = document.getElementById("cartLength");
 
 itemsModal.style.display = "none";
-// showCartDetails.style.display = "none";
+showCartDetails.style.display = "none";
 
 
 //function that allows user to signout of his/her account
@@ -99,6 +101,8 @@ function addToCart(ev, id) {
 
 function updateCart() {
     cartCount.innerHTML = myCart.length;
+    cartLength.innerHTML = myCart.length;
+
 }
 updateCart();
 
@@ -119,12 +123,12 @@ function showItemFullDetails(id) {
             <h6>${clickedItem.title}</h6>
             <h5>${clickedItem.description}</h5>
             <hr>
-            <h4>${"$"+clickedItem.price}</h4>
+            <h4>${"$" + clickedItem.price}</h4>
             <p class="few text-warning-emphasis">Few units left</p>
             <p class="few">+ shipping from $10 to your destination</p>
             <button class="btn btn-warning w-100" onclick="addToCart(event,${clickedItem.id})">${carted ? "REMOVE FROM CART" : "ADD TO CART"}</button>
         </div>
-        <button class="position-absolute end-0" onclick="closeModal()">
+        <button class="position-absolute end-0" onclick="closeItemsModal()">
             <i class="icofont-close-line fs-2 text-black"></i>
         </button>
     </div>
@@ -132,7 +136,30 @@ function showItemFullDetails(id) {
     // showItems();
 }
 
-function closeModal() {
+function closeItemsModal() {
     itemsModal.style.display = "none";
     showItems();
+}
+
+function showAllCartItems() {
+    showCartDetails.style.display = "block";
+    displayCartTag.innerHTML += `
+    <div class="d-flex w-100">
+        
+    </div>
+    `
+    checkOutAmountTag.innerHTML = `
+    <div class="w-100">
+        <h6>CART SUMMARY</h6>
+        <hr>
+        <div class="d-flex justify-content-between align-items-center">
+            <h6>Sub Total</h6>
+            <h4>$1300</h4>
+        </div>
+        <hr>
+        <button class="btn btn-warning shadow w-100">CHECKOUT ($1300)</button>
+
+    </div>
+    `
+
 }
