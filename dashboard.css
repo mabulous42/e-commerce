@@ -114,6 +114,10 @@ button{
     z-index: 20;
 }
 
+.modal-item-div{
+    height: 75%;
+}
+
 ::-webkit-scrollbar{
     display: none;
 }

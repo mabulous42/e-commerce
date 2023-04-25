@@ -1,6 +1,9 @@
 let userName = document.getElementById("userName");
 let displayTag = document.getElementById("display-items");
 let cartCount = document.getElementById("cartCount");
+let showItemDetails = document.getElementById("item-full-details");
+
+// showItemDetails.style.display = "none";
 
 
 //function that allows user to signout of his/her account
@@ -43,7 +46,7 @@ function showItems() {
         let carted = myCart.some(item => item.id == element.id);
         displayTag.innerHTML += `
         <div class='display shadow position-relative p-2 items-btn'>
-            <button onclick="openF()">
+            <button onclick="showItemFullDetails()">
                 <div>
                     <div class="w-100">
                         <img src="${element.thumbnail}" class="items-images w-100"></img>                    
@@ -95,6 +98,6 @@ function updateCart() {
 }
 updateCart();
 
-function openF() {
+function showItemFullDetails() {
     console.log("hello");
 }
