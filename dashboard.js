@@ -4,7 +4,7 @@ let cartCount = document.getElementById("cartCount");
 let itemsModal = document.getElementById("item-full-details-modal");
 let itemFullDetails = document.getElementById("show-items-details");
 
-// itemsModal.style.display = "none";
+itemsModal.style.display = "none";
 
 
 //function that allows user to signout of his/her account
@@ -100,18 +100,36 @@ function updateCart() {
 updateCart();
 
 function showItemFullDetails(id) {
+    itemsModal.style.display = "block";
     let clickedItem = itemList.find(el => el.id == id);
+    let carted = myCart.some(item => item.id == clickedItem.id);
     console.log(clickedItem);
     itemFullDetails.innerHTML = `
-    <div class="d-flex">
-        <div>
-            <img src="${found.thumbnail}" alt="">
+    <div class="d-flex position-relative">
+        <div class="w-50">
+            <img src="${clickedItem.thumbnail}" alt="" class="w-100">
+            <hr>
+            <p class="share">SHARE THIS PRODUCT</p>
         </div>
-        <div>${found.description}</div>
+        <div class="w-50 m-2">
+            <p class="official-store bg-success text-white w-25">Official Store</p>
+            <h6>${clickedItem.title}</h6>
+            <h5>${clickedItem.description}</h5>
+            <hr>
+            <h4>${"$"+clickedItem.price}</h4>
+            <p class="few text-warning-emphasis">Few units left</p>
+            <p class="few">+ shipping from $10 to your destination</p>
+            <button class="btn btn-warning w-100" onclick="addToCart(event,${clickedItem.id})">${carted ? "REMOVE FROM CART" : "ADD TO CART"}</button>
+        </div>
+        <button class="position-absolute end-0" onclick="closeModal()">
+            <i class="icofont-close-line fs-2 text-black"></i>
+        </button>
     </div>
     `
+    // showItems();
 }
 
 function closeModal() {
     itemsModal.style.display = "none";
+    showItems();
 }

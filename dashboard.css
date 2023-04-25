@@ -118,6 +118,16 @@ button{
     height: 75%;
 }
 
+.official-store{
+    font-size: 13px;
+    padding: 1px;
+    text-align: center;
+}
+
+.few{
+    font-size: 14px;
+}
+
 ::-webkit-scrollbar{
     display: none;
 }
