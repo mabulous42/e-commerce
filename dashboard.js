@@ -142,24 +142,42 @@ function closeItemsModal() {
 }
 
 function showAllCartItems() {
+    let totalCartSum = 0;
     showCartDetails.style.display = "block";
-    displayCartTag.innerHTML += `
-    <div class="d-flex w-100">
-        
+    console.log(myCart);
+    myCart.forEach(items => {
+        let quantity = 1;
+        let totalCostOfItem = quantity * items.price;
+        displayCartTag.innerHTML += `
+    <div class="d-flex align-items-center justify-content-between w-100 mb-2">
+        <div class="d-flex align-items-center me-3 w-100">
+            <div class="me-2 w-25">
+                <img src="${items.images[0]}" alt="" class="w-75"/>
+            </div>
+            <div class="w-75">${items.description}</div>
+        </div>
+        <div class="">${"$" + totalCostOfItem}</div>
     </div>
+    <hr>
     `
+    totalCartSum += totalCostOfItem;
+
     checkOutAmountTag.innerHTML = `
-    <div class="w-100">
+    <div class="w-100 checkOut">
         <h6>CART SUMMARY</h6>
         <hr>
         <div class="d-flex justify-content-between align-items-center">
             <h6>Sub Total</h6>
-            <h4>$1300</h4>
+            <h4>${"$" + totalCartSum}</h4>
         </div>
         <hr>
-        <button class="btn btn-warning shadow w-100">CHECKOUT ($1300)</button>
+        <button class="btn btn-warning shadow w-100">CHECKOUT (${"$" + totalCartSum})</button>
 
     </div>
     `
+    })  
+}
 
+function closeCartModal() {
+    showCartDetails.style.display = "none";
 }

@@ -106,15 +106,19 @@
             </div>
         </div> 
         <div class="showCartModal position-absolute w-100" id="check-out-modal">
-            <div class="innerCart-modal position-fixed w-100 bg-white d-flex align-items-center justify-content-center">
-                <div class="modal-cart-div w-75 p-4">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div class="shadow p-2 w-100 d-flex align-items-center justify-content-between" id="show-cart-details">
+            <div class="innerCart-modal w-100 bg-white d-flex align-items-center justify-content-center">
+                <div class="modal-cart-div w-75 p-5 position-relative">
+                    <div class="d-flex w-100">
+                        <div class="shadow p-2 w-100">
                             <h5>Cart(<span id="cartLength"></span>)</h5>
                             <hr>
+                            <div id="show-cart-details"></div>
                         </div>
                         <div class="shadow w-25 ms-2 p-2" id="show-total-amount"></div>
                     </div>
+                    <button class="position-absolute end-0 top-0" onclick="closeCartModal()">
+                        <i class="icofont-close-line fs-2 text-black"></i>
+                    </button>
                 </div>
             </div>
         </div>   

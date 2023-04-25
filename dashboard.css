@@ -126,6 +126,22 @@ button{
     font-size: 14px;
 }
 
+.innerCart-modal{
+    overflow: auto;
+}
+
+.modal-cart-div{
+    /* height: 50vh; */
+    /* padding-bottom: 10%; */
+    /* background-color: red; */
+    top: 30vh;
+    padding-bottom: 20vh;
+}
+
+.checkOut{
+    /* height: max-content; */
+}
+
 ::-webkit-scrollbar{
     display: none;
 }
