@@ -95,6 +95,7 @@ function addToCart(ev, id) {
         updateCart();
         myCart.forEach(el => {
             el.quantity = 1;
+            el.itemPrice = el.price;
         })
         localStorage.setItem("cart", JSON.stringify(myCart))
     }
@@ -143,14 +144,6 @@ function closeItemsModal() {
     itemsModal.style.display = "none";
     showItems();
 }
-let itemQuantity = document.getElementById("quantity");
-let quantity = 1;
-
-// let theItem = myCart.forEach(element => {
-//     element.quantity = 1;    
-//     console.log(element.quantity);
-// })
-
 
 let totalCostOfItem;
 function showAllCartItems() {
@@ -158,7 +151,7 @@ function showAllCartItems() {
     showCartDetails.style.display = "block";
     console.log(myCart);
     myCart.forEach(items => {
-        let totalCostOfItem = quantity * items.price;
+        let totalCostOfItem = items.quantity * items.price;
         displayCartTag.innerHTML += `
     <div class="d-flex align-items-center justify-content-between w-100 mb-2 carting">
         <div class="d-flex align-items-center me-3 w-100">
@@ -168,16 +161,17 @@ function showAllCartItems() {
             </div>
             <div class="w-75">${items.description}</div>
         </div>
-        <div>
-            <div class="w-25 text-center">
-                <div class="text-center">${"$" + totalCostOfItem}</div>
+        <div class="w-25">
+            <div class="w-100 text-center">
+                <div class="text-start cost-per-unit">Cost per unit: ${"$" + items.price}</div>
                 <div class="d-flex">
-                    <button class="btn btn-warning" onclick="reduceQuantity(${items.id})">-</button>
+                    <button class="btn btn-warning" onclick="reduceQuantity(${items.id})" id="reducebtn${items.id}">-</button>
                     <span id="quantity${items.id}">${items.quantity}</span>
                     <button class="btn btn-warning" onclick="increaseQuantity(${items.id})">+</button>
                 </div>
             </div>
-        </div>
+            </div>
+            <h5 class="text-start" id="totCostItem${items.id}">${"$" + totalCostOfItem}</h5>
     </div>
     <hr>
     `
@@ -211,14 +205,31 @@ function remove(id) {
 function increaseQuantity(id) {
     let myItems = myCart.find(el => el.id == id);
     myItems.quantity++
-    document.getElementById(`quantity${id}`).innerHTML = myItems.quantity
+    myItems.itemPrice += myItems.price;
+    document.getElementById(`quantity${id}`).innerHTML = myItems.quantity;
+    document.getElementById(`totCostItem${id}`).innerHTML = "$" + myItems.itemPrice;
     localStorage.setItem("cart", JSON.stringify(myCart));
     showAllCartItems();
-    // console.log(itemQuantity.innerHTML);
-    // itemList.quantity = quantity;
-    // itemList.totalPrice = totalPrice;
-    // localStorage.setItem("items", JSON.stringify(itemList));
-    // itemQuantity.value = 1;
+}
+
+
+
+function reduceQuantity(id) {
+    let myItems = myCart.find(el => el.id == id);
+    if (myItems.quantity == 1) {
+        document.getElementById(`reducebtn${id}`).disabled = true;
+        localStorage.setItem("cart", JSON.stringify(myCart));
+        showAllCartItems();
+        return;
+    } 
+    else {
+        myItems.quantity--;
+        myItems.itemPrice -= myItems.price;
+        document.getElementById(`quantity${id}`).innerHTML = myItems.quantity;
+        document.getElementById(`totCostItem${id}`).innerHTML = myItems.itemPrice;
+        localStorage.setItem("cart", JSON.stringify(myCart));
+        showAllCartItems();
+    }
 }
 
 
