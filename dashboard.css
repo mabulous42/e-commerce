@@ -131,15 +131,22 @@ button{
 }
 
 .modal-cart-div{
-    /* height: 50vh; */
+    height: 50vh;
     /* padding-bottom: 10%; */
     /* background-color: red; */
-    top: 30vh;
-    padding-bottom: 20vh;
+    
+}
+
+.carting{
+    /* margin-bottom: 20vh; */
 }
 
 .checkOut{
     /* height: max-content; */
+}
+
+.removeCart{
+    font-size: 5px;
 }
 
 ::-webkit-scrollbar{

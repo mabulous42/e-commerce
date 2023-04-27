@@ -93,6 +93,9 @@ function addToCart(ev, id) {
         ev.target.innerHTML = "REMOVE FROM CART";
         myCart.push(found);
         updateCart();
+        myCart.forEach(el => {
+            el.quantity = 1;
+        })
         localStorage.setItem("cart", JSON.stringify(myCart))
     }
     console.log(myCart);
@@ -140,23 +143,41 @@ function closeItemsModal() {
     itemsModal.style.display = "none";
     showItems();
 }
+let itemQuantity = document.getElementById("quantity");
+let quantity = 1;
 
+// let theItem = myCart.forEach(element => {
+//     element.quantity = 1;    
+//     console.log(element.quantity);
+// })
+
+
+let totalCostOfItem;
 function showAllCartItems() {
     let totalCartSum = 0;
     showCartDetails.style.display = "block";
     console.log(myCart);
     myCart.forEach(items => {
-        let quantity = 1;
         let totalCostOfItem = quantity * items.price;
         displayCartTag.innerHTML += `
-    <div class="d-flex align-items-center justify-content-between w-100 mb-2">
+    <div class="d-flex align-items-center justify-content-between w-100 mb-2 carting">
         <div class="d-flex align-items-center me-3 w-100">
             <div class="me-2 w-25">
                 <img src="${items.images[0]}" alt="" class="w-75"/>
+                <button class="removeCart mt-2 btn btn-warning" onclick="remove(${items.id})">Remove</button>
             </div>
             <div class="w-75">${items.description}</div>
         </div>
-        <div class="">${"$" + totalCostOfItem}</div>
+        <div>
+            <div class="w-25 text-center">
+                <div class="text-center">${"$" + totalCostOfItem}</div>
+                <div class="d-flex">
+                    <button class="btn btn-warning" onclick="reduceQuantity(${items.id})">-</button>
+                    <span id="quantity${items.id}">${items.quantity}</span>
+                    <button class="btn btn-warning" onclick="increaseQuantity(${items.id})">+</button>
+                </div>
+            </div>
+        </div>
     </div>
     <hr>
     `
@@ -180,4 +201,49 @@ function showAllCartItems() {
 
 function closeCartModal() {
     showCartDetails.style.display = "none";
+    displayCartTag.innerHTML ="";
 }
+
+function remove(id) {
+    
+}
+
+function increaseQuantity(id) {
+    let myItems = myCart.find(el => el.id == id);
+    myItems.quantity++
+    document.getElementById(`quantity${id}`).innerHTML = myItems.quantity
+    localStorage.setItem("cart", JSON.stringify(myCart));
+    showAllCartItems();
+    // console.log(itemQuantity.innerHTML);
+    // itemList.quantity = quantity;
+    // itemList.totalPrice = totalPrice;
+    // localStorage.setItem("items", JSON.stringify(itemList));
+    // itemQuantity.value = 1;
+}
+
+
+
+function makePayment() {
+    FlutterwaveCheckout({
+      public_key: "FLWPUBK_TEST-SANDBOXDEMOKEY-X",
+      tx_ref: "titanic-48981487343MDI0NzMx",
+      amount: 54600,
+      currency: "NGN",
+      payment_options: "card, banktransfer, ussd",
+      redirect_url: "https://glaciers.titanic.com/handle-flutterwave-payment",
+      meta: {
+        consumer_id: 23,
+        consumer_mac: "92a3-912ba-1192a",
+      },
+      customer: {
+        email: "rose@unsinkableship.com",
+        phone_number: "08102909304",
+        name: "Rose DeWitt Bukater",
+      },
+      customizations: {
+        title: "The Titanic Store",
+        description: "Payment for an awesome cruise",
+        logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
+      },
+    });
+  }
