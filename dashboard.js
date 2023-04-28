@@ -48,6 +48,7 @@ console.log(myCart);
 
 //function that consumes the API and also displaying the neccessary details from the API data
 function showItems() {
+    displayTag.innerHTML = "";
     itemList.forEach(element => {
         let carted = myCart.some(item => item.id == element.id);
         displayTag.innerHTML += `
@@ -87,12 +88,10 @@ function addToCart(ev, id) {
         ev.target.innerHTML = "ADD TO CART";
         let myIndex = myCart.indexOf(found);
         myCart.splice(myIndex, 1);
-        updateCart();
-        localStorage.setItem("cart", JSON.stringify(myCart))
+        localStorage.setItem("cart", JSON.stringify(myCart));
     } else {
         ev.target.innerHTML = "REMOVE FROM CART";
         myCart.push(found);
-        updateCart();
         myCart.forEach(el => {
             el.quantity = 1;
             el.itemPrice = el.price;
@@ -101,11 +100,16 @@ function addToCart(ev, id) {
     }
     console.log(myCart);
     showItems();
+    updateCart();
 }
 
 function updateCart() {
-    cartCount.innerHTML = myCart.length;
-    cartLength.innerHTML = myCart.length;
+    let totQty = 0;
+    myCart.forEach(element => {
+        totQty = totQty + element.quantity;
+        cartCount.innerHTML = totQty;
+        cartLength.innerHTML = totQty;
+    })
 
 }
 updateCart();
@@ -137,7 +141,6 @@ function showItemFullDetails(id) {
         </button>
     </div>
     `
-    // showItems();
 }
 
 function closeItemsModal() {
@@ -147,6 +150,7 @@ function closeItemsModal() {
 
 let totalCostOfItem;
 function showAllCartItems() {
+    displayCartTag.innerHTML = "";
     let totalCartSum = 0;
     showCartDetails.style.display = "block";
     console.log(myCart);
@@ -163,21 +167,21 @@ function showAllCartItems() {
         </div>
         <div class="w-25">
             <div class="w-100 text-center">
-                <div class="text-start cost-per-unit">Cost per unit: ${"$" + items.price}</div>
+                <div class="text-start cost-per-unit mb-2">Cost per unit: ${"$" + items.price}</div>
                 <div class="d-flex">
                     <button class="btn btn-warning" onclick="reduceQuantity(${items.id})" id="reducebtn${items.id}">-</button>
-                    <span id="quantity${items.id}">${items.quantity}</span>
+                    <span id="quantity${items.id}" class="w-50">${items.quantity}</span>
                     <button class="btn btn-warning" onclick="increaseQuantity(${items.id})">+</button>
                 </div>
             </div>
             </div>
-            <h5 class="text-start" id="totCostItem${items.id}">${"$" + totalCostOfItem}</h5>
+            <h5 class="text-center w-25" id="totCostItem${items.id}">${"$" + totalCostOfItem}</h5>
     </div>
     <hr>
     `
-    totalCartSum += totalCostOfItem;
+        totalCartSum += totalCostOfItem;
 
-    checkOutAmountTag.innerHTML = `
+        checkOutAmountTag.innerHTML = `
     <div class="w-100 checkOut">
         <h6>CART SUMMARY</h6>
         <hr>
@@ -186,23 +190,32 @@ function showAllCartItems() {
             <h4>${"$" + totalCartSum}</h4>
         </div>
         <hr>
-        <button class="btn btn-warning shadow w-100">CHECKOUT (${"$" + totalCartSum})</button>
+        <button class="btn btn-warning shadow w-100" type="button" id="start-payment-button" onclick="makePayment(${totalCartSum})">CHECKOUT (${"$" + totalCartSum})</button>
 
     </div>
     `
-    })  
+    })
 }
 
 function closeCartModal() {
     showCartDetails.style.display = "none";
-    displayCartTag.innerHTML ="";
+    showItems();
+    // displayCartTag.innerHTML = "";
 }
 
 function remove(id) {
-    
+    let rem_Item = myCart.find(item => item.id == id);
+    let theIndex = myCart.indexOf(rem_Item);
+    myCart.splice(theIndex, 1);
+    localStorage.setItem("cart", JSON.stringify(myCart));
+    showAllCartItems();
+    updateCart();
+    // showItemFullDetails();
+    // showItems();
 }
 
 function increaseQuantity(id) {
+    document.getElementById(`reducebtn${id}`).disabled = false;
     let myItems = myCart.find(el => el.id == id);
     myItems.quantity++
     myItems.itemPrice += myItems.price;
@@ -210,6 +223,7 @@ function increaseQuantity(id) {
     document.getElementById(`totCostItem${id}`).innerHTML = "$" + myItems.itemPrice;
     localStorage.setItem("cart", JSON.stringify(myCart));
     showAllCartItems();
+    updateCart();
 }
 
 
@@ -217,11 +231,10 @@ function increaseQuantity(id) {
 function reduceQuantity(id) {
     let myItems = myCart.find(el => el.id == id);
     if (myItems.quantity == 1) {
-        document.getElementById(`reducebtn${id}`).disabled = true;
-        localStorage.setItem("cart", JSON.stringify(myCart));
-        showAllCartItems();
+        // document.getElementById(`reducebtn${id}`).disabled = true;
+        // showAllCartItems();
         return;
-    } 
+    }
     else {
         myItems.quantity--;
         myItems.itemPrice -= myItems.price;
@@ -229,32 +242,33 @@ function reduceQuantity(id) {
         document.getElementById(`totCostItem${id}`).innerHTML = myItems.itemPrice;
         localStorage.setItem("cart", JSON.stringify(myCart));
         showAllCartItems();
+        updateCart();
     }
 }
 
 
 
-function makePayment() {
+function makePayment(amount) {
     FlutterwaveCheckout({
-      public_key: "FLWPUBK_TEST-SANDBOXDEMOKEY-X",
-      tx_ref: "titanic-48981487343MDI0NzMx",
-      amount: 54600,
-      currency: "NGN",
-      payment_options: "card, banktransfer, ussd",
-      redirect_url: "https://glaciers.titanic.com/handle-flutterwave-payment",
-      meta: {
-        consumer_id: 23,
-        consumer_mac: "92a3-912ba-1192a",
-      },
-      customer: {
-        email: "rose@unsinkableship.com",
-        phone_number: "08102909304",
-        name: "Rose DeWitt Bukater",
-      },
-      customizations: {
-        title: "The Titanic Store",
-        description: "Payment for an awesome cruise",
-        logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
-      },
+        public_key: "FLWPUBK_TEST-85859216e4b584fb414479d6eda07f5a-X",
+        tx_ref: "titanic-48981487343MDI0NzMx",
+        amount: amount,
+        currency: "NGN",
+        payment_options: "card, banktransfer, ussd",
+        redirect_url: "https://glaciers.titanic.com/handle-flutterwave-payment",
+        meta: {
+            consumer_id: 23,
+            consumer_mac: "92a3-912ba-1192a",
+        },
+        customer: {
+            email: "rose@unsinkableship.com",
+            phone_number: "08102909304",
+            name: "Rose DeWitt Bukater",
+        },
+        customizations: {
+            title: "The Titanic Store",
+            description: "Payment for an awesome cruise",
+            logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
+        },
     });
-  }
+}
