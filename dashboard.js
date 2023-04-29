@@ -44,12 +44,10 @@ itemList = JSON.parse(localStorage.getItem("items"));
 let myCart = JSON.parse(localStorage.getItem("cart")) || [];
 console.log(myCart);
 
-
-
-//function that consumes the API and also displaying the neccessary details from the API data
-function showItems() {
+//a global function that displays the content of an array
+function displayItemsOfAnArray(theArray) {
     displayTag.innerHTML = "";
-    itemList.forEach(element => {
+    theArray.forEach(element => {
         let carted = myCart.some(item => item.id == element.id);
         displayTag.innerHTML += `
         <div class='display shadow position-relative p-2 items-btn'>
@@ -69,6 +67,12 @@ function showItems() {
         </div>
         `
     });
+}
+
+//function that displays all items gotten from the API
+function showItems() {
+    //invoking the global display function and passing in the argument itemList
+    displayItemsOfAnArray(itemList);
 }
 //invoking the showItems() function
 showItems();
@@ -184,7 +188,7 @@ function showAllCartItems() {
             <h6 class="pt-2">CART SUMMARY</h6>
             <hr>
             <div class="d-flex justify-content-between align-items-center">
-                <h6>Sub Total</h6>
+                <h6>Subtotal</h6>
                 <h4>${"$" + totalCartSum}</h4>
             </div>
             <hr>
@@ -268,4 +272,12 @@ function makePayment(amount) {
             logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
         },
     });
+}
+
+function search() {
+    let products;
+    let brand;
+    let category;
+    displayItemsOfAnArray(itemList);
+
 }

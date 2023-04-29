@@ -130,11 +130,17 @@ button{
 }
 
 .modal-cart-div{
+    overflow: auto;
 }
 
 .the-real-cart-display{
     height: 100%;
     overflow: auto;
+}
+
+#show-total-amount{
+    width: 20%;
+    right: 45px;
 }
 
 .cost-per-unit{
