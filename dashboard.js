@@ -7,6 +7,7 @@ let showCartDetails = document.getElementById("check-out-modal");
 let displayCartTag = document.getElementById("show-cart-details");
 let checkOutAmountTag = document.getElementById("show-total-amount");
 let cartLength = document.getElementById("cartLength");
+let searchInput = document.getElementById("search-brand-product-category");
 
 itemsModal.style.display = "none";
 showCartDetails.style.display = "none";
@@ -275,9 +276,16 @@ function makePayment(amount) {
 }
 
 function search() {
-    let products;
-    let brand;
-    let category;
-    displayItemsOfAnArray(itemList);
+    let searchResult = itemList.filter((items) => (items.brand).toUpperCase() == (searchInput.value.toUpperCase()) || (items.category).toUpperCase() == (searchInput.value.toUpperCase()) || ((items.title).toUpperCase()).includes((searchInput.value.toUpperCase())));
 
+    if ((searchResult.length == 0)) {
+        console.log("not found");
+        alert("No Items found");
+    } 
+    else {
+        console.log("searchResult");
+        console.log(searchResult);
+        displayItemsOfAnArray(searchResult);
+    }
+    
 }
