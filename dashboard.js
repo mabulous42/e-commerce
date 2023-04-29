@@ -68,8 +68,6 @@ function showItems() {
             </button>
         </div>
         `
-
-
     });
 }
 //invoking the showItems() function
@@ -157,50 +155,49 @@ function showAllCartItems() {
     myCart.forEach(items => {
         let totalCostOfItem = items.quantity * items.price;
         displayCartTag.innerHTML += `
-    <div class="d-flex align-items-center justify-content-between w-100 mb-2 carting">
-        <div class="d-flex align-items-center me-3 w-100">
-            <div class="me-2 w-25">
-                <img src="${items.images[0]}" alt="" class="w-75"/>
-                <button class="removeCart mt-2 btn btn-warning" onclick="remove(${items.id})">Remove</button>
-            </div>
-            <div class="w-75">${items.description}</div>
-        </div>
-        <div class="w-25">
-            <div class="w-100 text-center">
-                <div class="text-start cost-per-unit mb-2">Cost per unit: ${"$" + items.price}</div>
-                <div class="d-flex">
-                    <button class="btn btn-warning" onclick="reduceQuantity(${items.id})" id="reducebtn${items.id}">-</button>
-                    <span id="quantity${items.id}" class="w-50">${items.quantity}</span>
-                    <button class="btn btn-warning" onclick="increaseQuantity(${items.id})">+</button>
+        <div class="d-flex align-items-center justify-content-between w-100 mb-2 carting">
+            <div class="d-flex align-items-center me-3 w-100">
+                <div class="me-2 w-25">
+                    <img src="${items.images[0]}" alt="" class="w-75"/>
+                    <button class="removeCart mt-2 btn btn-warning" onclick="remove(${items.id})">Remove</button>
                 </div>
+                <div class="w-75">${items.description}</div>
             </div>
-            </div>
-            <h5 class="text-center w-25" id="totCostItem${items.id}">${"$" + totalCostOfItem}</h5>
-    </div>
-    <hr>
-    `
+            <div class="w-25">
+                <div class="w-100 text-center">
+                    <div class="text-start cost-per-unit mb-2">Cost per unit: ${"$" + items.price}</div>
+                    <div class="d-flex">
+                        <button class="btn btn-warning" onclick="reduceQuantity(${items.id})" id="reducebtn${items.id}">-</button>
+                        <span id="quantity${items.id}" class="w-50">${items.quantity}</span>
+                        <button class="btn btn-warning" onclick="increaseQuantity(${items.id})">+</button>
+                    </div>
+                </div>
+                </div>
+                <h5 class="text-center w-25" id="totCostItem${items.id}">${"$" + totalCostOfItem}</h5>
+        </div>
+        <hr>
+        `
         totalCartSum += totalCostOfItem;
 
         checkOutAmountTag.innerHTML = `
-    <div class="w-100 checkOut">
-        <h6>CART SUMMARY</h6>
-        <hr>
-        <div class="d-flex justify-content-between align-items-center">
-            <h6>Sub Total</h6>
-            <h4>${"$" + totalCartSum}</h4>
-        </div>
-        <hr>
-        <button class="btn btn-warning shadow w-100" type="button" id="start-payment-button" onclick="makePayment(${totalCartSum})">CHECKOUT (${"$" + totalCartSum})</button>
+        <div class="w-100 sticky-top">
+            <h6 class="pt-2">CART SUMMARY</h6>
+            <hr>
+            <div class="d-flex justify-content-between align-items-center">
+                <h6>Sub Total</h6>
+                <h4>${"$" + totalCartSum}</h4>
+            </div>
+            <hr>
+            <button class="btn btn-warning shadow w-100" type="button" id="start-payment-button" onclick="makePayment(${totalCartSum})">CHECKOUT (${"$" + totalCartSum})</button>
 
-    </div>
-    `
+        </div>
+        `
     })
 }
 
 function closeCartModal() {
     showCartDetails.style.display = "none";
     showItems();
-    // displayCartTag.innerHTML = "";
 }
 
 function remove(id) {

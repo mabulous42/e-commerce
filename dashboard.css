@@ -113,7 +113,7 @@ button{
 .innerCart-modal{
     height: 100vh;
     position: fixed;
-    z-index: 20;
+    /* z-index: 20; */
 }
 
 .official-store{
@@ -127,22 +127,18 @@ button{
 }
 
 .innerCart-modal{
-    overflow: auto;
 }
 
 .modal-cart-div{
-    height: 50vh;
-    /* padding-bottom: 10%; */
-    /* background-color: red; */
-    
+}
+
+.the-real-cart-display{
+    height: 100%;
+    overflow: auto;
 }
 
 .cost-per-unit{
     font-size: 14px;
-}
-
-.checkOut{
-    /* height: max-content; */
 }
 
 .removeCart{

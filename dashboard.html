@@ -36,7 +36,8 @@
                         </div>
                     </button>
                     <button type="button" class="cart w-25 position-relative" onclick="showAllCartItems()">
-                        <div class="bg-danger rounded-circle cart-items position-absolute d-flex align-items-center justify-content-center text-white" id="cartCount">0</div>
+                        <div class="bg-danger rounded-circle cart-items position-absolute d-flex align-items-center justify-content-center text-white"
+                            id="cartCount">0</div>
                         <i class="fa-solid fa-cart-shopping me-3"></i>Cart
                     </button>
                 </div>
@@ -58,7 +59,8 @@
                 </button>
                 <button class="">
                     <div class="">
-                        <img src="./images/AD-Group-no-background-removebg-preview.png" alt="" class="rounded-5 bg-warning">
+                        <img src="./images/AD-Group-no-background-removebg-preview.png" alt=""
+                            class="rounded-5 bg-warning">
                     </div>
                     <div>Skin Care</div>
                 </button>
@@ -88,40 +90,44 @@
                 </button>
                 <button class="">
                     <div class="">
-                        <img src="./images//Groceries-Transparent-Images-PNG.png" alt="" class="py-4 rounded-5 bg-warning">
+                        <img src="./images//Groceries-Transparent-Images-PNG.png" alt=""
+                            class="py-4 rounded-5 bg-warning">
                     </div>
                     <div>Groceries</div>
-                </button>   
+                </button>
             </div>
-        </div> 
+        </div>
         <div class="mt-4 shadow">
             <h1 class="bg-warning">All Products</h1>
-            <div id="display-items" class="container-fluid d-flex flex-wrap align-items-center justify-content-center"></div>
-        </div>  
+            <div id="display-items" class="container-fluid d-flex flex-wrap align-items-center justify-content-center">
+            </div>
+        </div>
         <div class="showItemDetailsModal position-absolute w-100" id="item-full-details-modal">
             <div class="inner-modal position-fixed w-100 bg-white d-flex align-items-center justify-content-center">
                 <div class="modal-item-div shadow w-75 p-4" id="show-items-details">
-                    
+
                 </div>
             </div>
-        </div> 
+        </div>
         <div class="showCartModal position-absolute w-100" id="check-out-modal">
             <div class="innerCart-modal w-100 bg-white d-flex justify-content-center">
-                <div class="modal-cart-div w-100 mt-5 p-5 position-relative">
-                    <div class="d-flex w-100">
+                <div class="modal-cart-div w-100 mt-5 px-5 pb-5 pt-2  position-relative">
+                    <div class="the-real-cart-display d-flex w-100">
                         <div class="shadow p-2 w-100">
-                            <h5>Cart(<span id="cartLength"></span>)</h5>
-                            <hr>
+                            <div class="sticky-top bg-white">
+                                <h5 class="pt-2">Cart(<span id="cartLength"></span>)</h5>
+                                <hr>
+                            </div>
                             <div id="show-cart-details"></div>
                         </div>
                         <div class="shadow w-25 ms-2 p-2" id="show-total-amount"></div>
                     </div>
-                    <button class="position-absolute end-0 top-0" onclick="closeCartModal()">
-                        <i class="icofont-close-line fs-2 text-black"></i>
+                    <button class="position-absolute end-0 top-0 mt-3" onclick="closeCartModal()">
+                        <i class="icofont-close-line fs-2 p-2 text-black"></i>
                     </button>
                 </div>
             </div>
-        </div>   
+        </div>
     </main>
 
 
