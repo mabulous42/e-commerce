@@ -22,7 +22,7 @@
                 <form class="d-flex w-50" role="search">
                     <input class="form-control me-2" type="search" id="search-brand-product-category" placeholder="Search products, brands and categories"
                         aria-label="Search">
-                    <button class="btn btn-warning text-white fw-bold" type="submit" onclick="search()">SEARCH</button>
+                    <button class="btn btn-warning text-white fw-bold" type="submit" onclick="search(event)">SEARCH</button>
                 </form>
                 <div class="w-25 d-flex">
                     <button type="button" class="profile-parent w-50 me-3 position-relative">
@@ -104,8 +104,11 @@
         </div>
         <div class="showItemDetailsModal position-absolute w-100" id="item-full-details-modal">
             <div class="inner-modal position-fixed w-100 bg-white d-flex align-items-center justify-content-center">
-                <div class="modal-item-div shadow w-75 p-4" id="show-items-details">
-
+                <div class="modal-item-div shadow w-75 p-4 position-relative" id="show-items-details">
+                    
+                </div>
+                <div class="show-items-images-modal position-absolute w-100 d-flex align-items-center justify-content-center">
+                    <div class="images-div w-50"></div>
                 </div>
             </div>
         </div>

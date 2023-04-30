@@ -27,7 +27,8 @@ userName.innerHTML = currentUser.name;
 
 //checking if there is a current user on the site, if none, the dashboard link should not be accessible, it should redirect back to index.html
 if (!currentUser) {
-    // window.location.href = "index.html";
+    console.log(!currentUser);
+    window.location.href = "index.html";
 }
 
 let itemList;
@@ -275,10 +276,14 @@ function makePayment(amount) {
     });
 }
 
-function search() {
-    let searchResult = itemList.filter((items) => (items.brand).toUpperCase() == (searchInput.value.toUpperCase()) || (items.category).toUpperCase() == (searchInput.value.toUpperCase()) || ((items.title).toUpperCase()).includes((searchInput.value.toUpperCase())));
-
-    if ((searchResult.length == 0)) {
+function search(ev) {
+    ev.preventDefault();
+    let searchResult = itemList.filter((items) => (items.brand).toUpperCase() == (searchInput.value.toUpperCase()) 
+    || (items.category).toUpperCase() == (searchInput.value.toUpperCase()) 
+    || ((items.title).toUpperCase()).includes((searchInput.value.toUpperCase())));
+    
+    searchInput.value = "";
+    if (searchResult.length == 0) {
         console.log("not found");
         alert("No Items found");
     } 
