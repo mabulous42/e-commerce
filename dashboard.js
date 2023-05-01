@@ -8,9 +8,12 @@ let displayCartTag = document.getElementById("show-cart-details");
 let checkOutAmountTag = document.getElementById("show-total-amount");
 let cartLength = document.getElementById("cartLength");
 let searchInput = document.getElementById("search-brand-product-category");
+let showItemsImages = document.getElementById("items-images-parent");
+let itemsImagesTag = document.getElementById("items-images");
 
 itemsModal.style.display = "none";
 showCartDetails.style.display = "none";
+showItemsImages.style.visibility = "hidden";
 
 
 //function that allows user to signout of his/her account
@@ -126,7 +129,7 @@ function showItemFullDetails(id) {
     itemFullDetails.innerHTML = `
     <div class="d-flex position-relative">
         <div class="w-50">
-            <img src="${clickedItem.thumbnail}" alt="" class="w-100">
+            <img src="${clickedItem.thumbnail}" alt="" class="w-100" onclick="showFullImages(${clickedItem.id})">
             <hr>
             <p class="share">SHARE THIS PRODUCT</p>
         </div>
@@ -145,6 +148,45 @@ function showItemFullDetails(id) {
         </button>
     </div>
     `
+}
+
+let imageCount = 0;
+function showFullImages(id) {
+    showItemsImages.style.visibility = "visible";
+    let thisItem = itemList.find(el => el.id == id);
+    console.log(thisItem);
+    // console.log(thisItem.images.length);
+    itemsImagesTag.innerHTML = `
+    <div>
+    <h2 class="text-white">Product Images</h2>
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="${thisItem.images[imageCount]}" class="d-block w-100" alt="...">
+                </div>            
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev" onclick="prevSlide()">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next" onclick="nextSlide(${thisItem.id, thisItem.images.length})">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    `
+}
+
+function nextSlide(id, imageArrayLength) {
+    imageCount++;
+    console.log(imageArrayLength);
+    // if (imageCount == imageArrayLength-1) {
+    //     return;
+    // } else {
+    //     console.log(imageCount);
+    //     showFullImages(id);        
+    // }
 }
 
 function closeItemsModal() {
@@ -278,19 +320,19 @@ function makePayment(amount) {
 
 function search(ev) {
     ev.preventDefault();
-    let searchResult = itemList.filter((items) => (items.brand).toUpperCase() == (searchInput.value.toUpperCase()) 
-    || (items.category).toUpperCase() == (searchInput.value.toUpperCase()) 
-    || ((items.title).toUpperCase()).includes((searchInput.value.toUpperCase())));
-    
+    let searchResult = itemList.filter((items) => (items.brand).toUpperCase() == (searchInput.value.toUpperCase())
+        || (items.category).toUpperCase() == (searchInput.value.toUpperCase())
+        || ((items.title).toUpperCase()).includes((searchInput.value.toUpperCase())));
+
     searchInput.value = "";
     if (searchResult.length == 0) {
         console.log("not found");
         alert("No Items found");
-    } 
+    }
     else {
         console.log("searchResult");
         console.log(searchResult);
         displayItemsOfAnArray(searchResult);
     }
-    
+
 }
